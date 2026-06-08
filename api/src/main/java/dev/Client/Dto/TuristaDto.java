@@ -1,16 +1,32 @@
 package dev.Client.Dto;
 
 import dev.Client.Entity.TuristaEntity;
-import dev.Client.Entity.VisitacoesEntityByTurista;
+import dev.Client.Entity.VisitacoesEntity;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
 public class TuristaDto {
 
     public static class Request {
+        @NotBlank(message = "Nome é obrigatório")
         private String nome;
+
+        @NotBlank(message = "CPF é obrigatório")
+        @CPF(message = "CPF inválido")
         private String cpf;
+
+        @NotBlank(message = "E-mail é obrigatório")
+        @Email(message = "E-mail inválido")
         private String email;
+
+        @NotBlank(message = "Senha é obrigatória")
+        @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
+        private String senha;
+
         private String telefone;
         private String passaporte;
         private LocalDate dataNascimento;
@@ -23,6 +39,8 @@ public class TuristaDto {
         public void setCpf(String cpf)                 { this.cpf = cpf; }
         public String getEmail()                       { return email; }
         public void setEmail(String email)             { this.email = email; }
+        public String getSenha()                       { return senha; }
+        public void setSenha(String senha)             { this.senha = senha; }
         public String getTelefone()                    { return telefone; }
         public void setTelefone(String telefone)       { this.telefone = telefone; }
         public String getPassaporte()                  { return passaporte; }
