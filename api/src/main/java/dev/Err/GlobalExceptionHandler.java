@@ -4,13 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import dev.Err.Response.ErroResponse;
 
-
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -29,6 +30,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(new ErroResponse(404, "Rota não encontrada"));
+    }
+
+    // 400 — Erros de validação (@Valid)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErroResponse> validationError(MethodArgumentNotValidException ex) {
+        String mensagem = ex.getBindingResult().getFieldErrors()
+            .stream()
+            .map(e -> e.getField() + ": " + e.getDefaultMessage())
+            .collect(Collectors.joining(", "));
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(new ErroResponse(400, mensagem));
     }
 
     // 500 — Qualquer outro erro inesperado
