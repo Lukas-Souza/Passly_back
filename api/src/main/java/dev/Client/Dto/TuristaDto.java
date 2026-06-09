@@ -1,6 +1,7 @@
 package dev.Client.Dto;
 
 import dev.Client.Entity.TuristaEntity;
+import dev.Instituicao.Entity.VisitacaoEntity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -15,7 +16,6 @@ public class TuristaDto {
         private String nome;
 
         @NotBlank(message = "CPF é obrigatório")
-        @CPF(message = "CPF inválido")
         private String cpf;
 
         @NotBlank(message = "E-mail é obrigatório")
@@ -83,10 +83,10 @@ public class TuristaDto {
 
         public HistoricoResponse() {}
 
-        public HistoricoResponse(VisitacoesEntityByTurista v) {
+        public HistoricoResponse(VisitacaoEntity v) {
             this.visitacaoId = v.getId();
-            this.localVisitado = v.getLocalVisitado();
-            this.dataVisita    = v.getDataVisita().toLocalDate();
+            this.localVisitado = v.getLocalTuristico().toString();
+            this.dataVisita    = v.getDataVisita();
         }
 
         public Long getVisitacaoId()          { return visitacaoId; }

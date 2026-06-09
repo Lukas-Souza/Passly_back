@@ -27,13 +27,7 @@ public class TuristaService {
     }
 
     public TuristaDto.Response cadastrar(TuristaDto.Request dto) {
-        if (turistaRepository.existsByCpf(dto.getCpf())) {
-            throw new RuntimeException("Já existe um turista com esse CPF.");
-        }
-        if (turistaRepository.existsByEmail(dto.getEmail())) {
-            throw new RuntimeException("Já existe um turista com esse e-mail.");
-        }
-
+    
         TuristaEntity turista = new TuristaEntity();
         turista.setNome(dto.getNome());
         turista.setCpf(dto.getCpf());
@@ -67,7 +61,7 @@ public class TuristaService {
         }
         TuristaEntity turista = turistaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Turista não encontrado com id: " + id));
-        turistaRepository.delete(turista);
+        turistaRepository.deleteById(id);
     }
 
     public TuristaDto.Response buscarPorId(Long id) {
