@@ -15,10 +15,5 @@ public class ApiAplicationControllers {
     public ApiAplicationControllers( JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
-
-    @GetMapping("/")
-    public String getMethodName() {
-        return new String("Passly esta rodando em produção...");
-    }
     
 }
