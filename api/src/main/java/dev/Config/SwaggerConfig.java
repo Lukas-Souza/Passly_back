@@ -1,3 +1,9 @@
+import java.lang.ProcessHandle.Info;
+
+import org.springframework.context.annotation.Configuration;
+
+import io.swagger.v3.oas.models.OpenAPI;
+
 @Configuration
 public class SwaggerConfig {
 
