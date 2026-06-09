@@ -16,9 +16,4 @@ public class ApiAplicationControllers {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @GetMapping("/")
-    public String getMethodName() {
-        return new String("Passly esta rodando em produção...");
-    }
-    
 }

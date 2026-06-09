@@ -1,11 +1,10 @@
 package dev.Client.Dto;
 
 import dev.Client.Entity.TuristaEntity;
-import dev.Client.Entity.VisitacoesEntity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.br.CPF;
+
 
 import java.time.LocalDate;
 
