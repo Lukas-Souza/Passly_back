@@ -1,7 +1,10 @@
 package dev.Instituicao.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
+
+import dev.Instituicao.DTO.Response.VisitacaoResponse;
 import dev.Instituicao.Entity.LocalTuristicoEntity;
 import dev.Instituicao.Entity.VisitacaoEntity;
 import dev.Instituicao.Repository.Interface.ILocalTuristicoRepository;
@@ -48,7 +51,13 @@ public LocalTuristicoEntity buscarPorId(long id) {
     return _localTurrisRepository.findById(id).orElse(null);
 }
 
-public List<VisitacaoEntity> listarVisistas(Long id) {
-    return _localTurrisRepository.findVisitacoesByLocalId(id);
+public List<VisitacaoResponse> listarVisistas(Long id) {
+    List<VisitacaoResponse> visitacaoDto = new ArrayList<VisitacaoResponse>();
+    List<VisitacaoEntity> visitacaoEntities = _localTurrisRepository.findVisitacoesByLocalId(id);
+    for (VisitacaoEntity visitacaoEntity : visitacaoEntities) {
+        VisitacaoResponse response = new VisitacaoResponse(visitacaoEntity.getDataVisita().toString(), visitacaoEntity.getNotaVisitacao(), visitacaoEntity.getId().toString());
+        visitacaoDto.add(response);
+    }
+    return visitacaoDto;
 }
 }

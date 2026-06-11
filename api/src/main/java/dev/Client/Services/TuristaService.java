@@ -33,6 +33,7 @@ public class TuristaService {
         turista.setCpf(dto.getCpf());
         turista.setEmail(dto.getEmail());
         turista.setTelefone(dto.getTelefone());
+        turista.setLogin(dto.getLogin());
         turista.setDataNascimento(dto.getDataNascimento());
         turista.setSenha(passwordEncoder.encode(dto.getSenha()));
 
