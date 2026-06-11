@@ -25,6 +25,7 @@ public class TuristaDto {
         @NotBlank(message = "Senha é obrigatória")
         @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
         private String senha;
+        private String login;
 
         private String telefone;
         private String passaporte;
@@ -46,7 +47,9 @@ public class TuristaDto {
         public void setPassaporte(String passaporte)   { this.passaporte = passaporte; }
         public LocalDate getDataNascimento()           { return dataNascimento; }
         public void setDataNascimento(LocalDate d)     { this.dataNascimento = d; }
-    }
+        public void setLogin(String Plogin)            {this.login = Plogin;}
+        public String getLogin()                       {return login;}
+    }   
 
     public static class Response {
         private Long id;
@@ -54,7 +57,7 @@ public class TuristaDto {
         private String cpf;
         private String email;
         private String telefone;
-
+        private String login;
         private LocalDate dataNascimento;
 
         public Response() {}
@@ -66,14 +69,16 @@ public class TuristaDto {
             this.email          = turista.getEmail();
             this.telefone       = turista.getTelefone();
             this.dataNascimento = turista.getDataNascimento();
+            this.login          = turista.getLogin();
         }
 
         public Long getId()                  { return id; }
         public String getNome()              { return nome; }
-        public String getCpf()              { return cpf; }
+        public String getCpf()               { return cpf; }
         public String getEmail()             { return email; }
         public String getTelefone()          { return telefone; }
         public LocalDate getDataNascimento() { return dataNascimento; }
+        public String getLogin()             {return login;}
     }
 
     public static class HistoricoResponse {
