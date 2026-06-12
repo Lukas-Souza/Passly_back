@@ -21,10 +21,10 @@ class CheckInController {
     }
 
     @PostMapping("/check-in/{idLocal}/{idUser}")
-    public ResponseEntity<String> checkInByIdLocalTuristico(@PathVariable long IdLocal,@PathVariable Long IdUser, @RequestBody CheckInModel checkInModel) {
+    public ResponseEntity<String> checkInByIdLocalTuristico(@PathVariable("idLocal") long IdLocal,@PathVariable long idUser, @RequestBody CheckInModel checkInModel) {
         try {
-            checkInService.CheckIn(IdLocal, IdUser, checkInModel);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Check-in criado com sucesso");
+            
+            return ResponseEntity.status(HttpStatus.CREATED).body(checkInService.CheckIn(IdLocal, idUser, checkInModel));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErroResponse(500, e.getMessage()).toString());
         }
